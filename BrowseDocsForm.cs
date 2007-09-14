@@ -18,6 +18,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SharpCouch;
 
 namespace CouchBrowse
 {
@@ -28,7 +29,7 @@ namespace CouchBrowse
 	{
 		private string mServer;
 		private string mDB;
-		private CouchWrap mCouchWrap=new CouchWrap();
+		private DB mCouchWrap=new DB();
 		
 		public BrowseDocsForm(string server,string db)
 		{

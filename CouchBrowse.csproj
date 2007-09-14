@@ -35,7 +35,6 @@
     <Compile Include="BrowseDocsForm.Designer.cs">
       <DependentUpon>BrowseDocsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CouchWrap.cs" />
     <Compile Include="DocIDForm.cs" />
     <Compile Include="DocIDForm.Designer.cs">
       <DependentUpon>DocIDForm.cs</DependentUpon>
@@ -87,6 +86,10 @@
     <ProjectReference Include="LitJson\LitJson.csproj">
       <Project>{67F185EA-F7DE-437C-8D57-A7C1AACFD705}</Project>
       <Name>LitJson</Name>
+    </ProjectReference>
+    <ProjectReference Include="SharpCouch\SharpCouch.csproj">
+      <Project>{4C9FD949-AF2E-403C-9AB1-ECD93DFB6DD7}</Project>
+      <Name>SharpCouch</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
