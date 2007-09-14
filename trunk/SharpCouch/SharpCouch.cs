@@ -137,7 +137,7 @@ namespace SharpCouch
 		/// <returns>The result (JSON format)</returns>
 		public string ExecTempView(string server,string db,string viewdef)
 		{
-			return DoRequest(server+"/"+db+"/_temp_view","POST",viewdef);
+			return DoRequest(server+"/"+db+"/_temp_view","POST",viewdef,"application/javascript");
 		}
 		
 		/// <summary>
@@ -149,7 +149,7 @@ namespace SharpCouch
 		/// <param name="content">The document contents (JSON).</param>
 		public void CreateDocument(string server,string db,string content)
 		{
-			DoRequest(server+"/"+db,"POST",content);
+			DoRequest(server+"/"+db,"POST",content,"application/json");
 		}
 
 		/// <summary>
@@ -186,7 +186,7 @@ namespace SharpCouch
 		/// <returns>The server's response</returns>
 		private string DoRequest(string url,string method)
 		{
-			return DoRequest(url,method,null);
+			return DoRequest(url,method,null,null);
 		}
 		
 		/// <summary>
@@ -199,11 +199,15 @@ namespace SharpCouch
 		/// <param name="method">The method, e.g. "GET"</param>
 		/// <param name="postdata">Data to be posted with the request,
 		/// or null if not required.</param>
+		/// <param name="contenttype">The content type to send, or null
+		/// if not required.</param>
 		/// <returns>The server's response</returns>
-		private string DoRequest(string url,string method,string postdata)
+		private string DoRequest(string url,string method,string postdata,string contenttype)
 		{
 			HttpWebRequest req=WebRequest.Create(url) as HttpWebRequest;
 			req.Method=method;
+			if(contenttype!=null)
+				req.ContentType=contenttype;
 			
 			if(postdata!=null)
 			{
