@@ -1,4 +1,4 @@
-// CouchWrap - a simple wrapper class for the CouchDB HTTP API
+// SharpCouch - a simple wrapper class for the CouchDB HTTP API
 // Copyright 2007 Ciaran Gultnieks
 //
 // This program is free software; you can redistribute it and/or
@@ -22,7 +22,7 @@ using System.Text;
 using System.Collections.Generic;
 using LitJson;
 
-namespace CouchBrowse
+namespace SharpCouch
 {
 
 	/// <summary>
@@ -40,9 +40,9 @@ namespace CouchBrowse
 	/// call the appropriate methods to interact with CouchDB.
 	/// All methods throw exceptions when things go wrong.
 	/// </summary>
-	public class CouchWrap
+	public class DB
 	{
-		public CouchWrap()
+		public DB()
 		{
 		}
 

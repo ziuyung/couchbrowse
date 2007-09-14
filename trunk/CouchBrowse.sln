@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CouchBrowse", "CouchBrowse.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LitJson", "LitJson\LitJson.csproj", "{67F185EA-F7DE-437C-8D57-A7C1AACFD705}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpCouch", "SharpCouch\SharpCouch.csproj", "{4C9FD949-AF2E-403C-9AB1-ECD93DFB6DD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,5 +22,9 @@ Global
 		{67F185EA-F7DE-437C-8D57-A7C1AACFD705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67F185EA-F7DE-437C-8D57-A7C1AACFD705}.Release|Any CPU.Build.0 = Release|Any CPU
 		{67F185EA-F7DE-437C-8D57-A7C1AACFD705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C9FD949-AF2E-403C-9AB1-ECD93DFB6DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C9FD949-AF2E-403C-9AB1-ECD93DFB6DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C9FD949-AF2E-403C-9AB1-ECD93DFB6DD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C9FD949-AF2E-403C-9AB1-ECD93DFB6DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 EndGlobal

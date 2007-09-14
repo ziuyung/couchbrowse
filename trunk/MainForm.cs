@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using SharpCouch;
 
 namespace CouchBrowse
 {
@@ -28,7 +29,7 @@ namespace CouchBrowse
 	public partial class MainForm : Form
 	{
 		
-		private CouchWrap mCouchWrap;
+		private DB mDB;
 		private bool mConnected;
 		private string mSavedQuery="function(doc) { return doc; }";
 		
@@ -40,7 +41,7 @@ namespace CouchBrowse
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			mCouchWrap=new CouchWrap();
+			mDB=new DB();
 			mConnected=false;
 			txtServer.Focus();
 			UpdateGreys();
@@ -61,7 +62,7 @@ namespace CouchBrowse
 				NewDBForm f=new NewDBForm();
 				if(f.ShowDialog()==DialogResult.OK)
 				{
-					mCouchWrap.CreateDatabase(txtServer.Text,f.DBName);
+					mDB.CreateDatabase(txtServer.Text,f.DBName);
 					StatusBar.Items[0].Text="Created database '"+f.DBName+"'";
 				}
 			}
@@ -81,7 +82,7 @@ namespace CouchBrowse
 			{
 				try
 				{
-					mCouchWrap.DeleteDatabase(txtServer.Text,db);
+					mDB.DeleteDatabase(txtServer.Text,db);
 					StatusBar.Items[0].Text="Deleted database '"+db+"'";
 				}
 				catch(Exception ex)
@@ -111,7 +112,7 @@ namespace CouchBrowse
 			{
 				try
 				{
-					string doc=mCouchWrap.GetDocument(txtServer.Text,db,f.DocID);
+					string doc=mDB.GetDocument(txtServer.Text,db,f.DocID);
 					// This output really needs formatting, but for now we will just
 					// replace the unix line breaks with windows ones...
 					doc=doc.Replace("\n","\r\n");
@@ -134,7 +135,7 @@ namespace CouchBrowse
 			{
 				try
 				{
-					mCouchWrap.DeleteDocument(txtServer.Text,db,f.DocID);
+					mDB.DeleteDocument(txtServer.Text,db,f.DocID);
 					StatusBar.Items[0].Text="Document deleted";
 				}
 				catch(Exception ex)
@@ -155,7 +156,7 @@ namespace CouchBrowse
 			{
 				try
 				{
-					mCouchWrap.CreateDocument(txtServer.Text,db,f.Content);
+					mDB.CreateDocument(txtServer.Text,db,f.Content);
 					StatusBar.Items[0].Text="Document created";
 				}
 				catch(Exception ex)
@@ -186,7 +187,7 @@ namespace CouchBrowse
 				try
 				{
 					mSavedQuery=f.QueryDef;
-					string result=mCouchWrap.ExecTempView(txtServer.Text,db,mSavedQuery);
+					string result=mDB.ExecTempView(txtServer.Text,db,mSavedQuery);
 					// This output really needs formatting, but for now we will just
 					// replace the unix line breaks with windows ones...
 					result=result.Replace("\n","\r\n");
@@ -246,7 +247,7 @@ namespace CouchBrowse
 		{
 			string db=GetSelectedDB();
 			if(db=="") return;
-			int count=mCouchWrap.CountDocuments(txtServer.Text,db);
+			int count=mDB.CountDocuments(txtServer.Text,db);
 			lstDatabases.SelectedItems[0].SubItems[1].Text=count.ToString();
 		}
 
@@ -259,12 +260,12 @@ namespace CouchBrowse
 		{
 			try
 			{
-				string[] dbs=mCouchWrap.GetDatabases(txtServer.Text);
+				string[] dbs=mDB.GetDatabases(txtServer.Text);
 				lstDatabases.Items.Clear();
 				foreach(string s in dbs)
 				{
 					ListViewItem li=new ListViewItem(s);
-					int count=mCouchWrap.CountDocuments(txtServer.Text,s);
+					int count=mDB.CountDocuments(txtServer.Text,s);
 					li.SubItems.Add(new ListViewItem.ListViewSubItem(li,count.ToString()));
 					lstDatabases.Items.Add(li);
 				}
