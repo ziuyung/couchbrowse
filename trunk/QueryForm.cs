@@ -31,6 +31,28 @@ namespace CouchBrowse
 		{
 			get { return txtViewDef.Text; }
 		}		
+
+		public string StartKey
+		{
+			get
+			{
+				if(txtStartKey.Text=="")
+					return null;
+				else
+					return txtStartKey.Text;
+			}
+		}
+
+		public string EndKey
+		{
+			get
+			{
+				if(txtEndKey.Text=="")
+					return null;
+				else
+					return txtEndKey.Text;
+			}
+		}		
 		
 		public QueryForm(string initialtext)
 		{
