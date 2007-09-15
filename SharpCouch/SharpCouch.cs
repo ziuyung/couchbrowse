@@ -56,10 +56,13 @@ namespace SharpCouch
 		{
 			string result=DoRequest(server+"/_all_dbs","GET");
 
-			JsonData d=JsonMapper.ToObject(result);
 			List<string> list=new List<string>();
-			foreach(JsonData db in d)
-				list.Add(db.ToString());
+			if(result!="[]")
+			{
+				JsonData d=JsonMapper.ToObject(result);
+				foreach(JsonData db in d)
+					list.Add(db.ToString());
+			}
 			return(list.ToArray());			
 		}
 	
@@ -75,12 +78,13 @@ namespace SharpCouch
 			// present other than getting a list of all documents...
 			string result=DoRequest(server+"/"+db+"/_all_docs","GET");
 
+			int count=0;
 			JsonData d=JsonMapper.ToObject(result);
-			int count=d["rows"].Count;
+			if(d["rows"].IsArray)
+				count=d["rows"].Count;
 			return count;
 		}
 
-		
 		/// <summary>
 		/// Get information on all the documents in the given database.
 		/// </summary>
@@ -103,7 +107,7 @@ namespace SharpCouch
 			}			
 			return list.ToArray();
 		}
-		
+
 		/// <summary>
 		/// Create a new database.
 		/// </summary>
@@ -134,10 +138,22 @@ namespace SharpCouch
 		/// <param name="server">The server URL</param>
 		/// <param name="db">The database name</param>
 		/// <param name="viewdef">The javascript view definition</param>
+		/// <param name="startkey">The startkey or null not to use</param>
+		/// <param name="endkey">The endkey or null not to use</param>
 		/// <returns>The result (JSON format)</returns>
-		public string ExecTempView(string server,string db,string viewdef)
+		public string ExecTempView(string server,string db,string viewdef,string startkey,string endkey)
 		{
-			return DoRequest(server+"/"+db+"/_temp_view","POST",viewdef,"application/javascript");
+			string url=server+"/"+db+"/_temp_view";
+			if(startkey!=null)
+			{
+				url+="?startkey="+startkey;
+			}
+			if(endkey!=null)
+			{
+				if(startkey==null) url+="?"; else url+="&";
+				url+="endkey="+endkey;
+			}
+			return DoRequest(url,"POST",viewdef,"application/javascript");
 		}
 		
 		/// <summary>

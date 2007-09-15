@@ -187,7 +187,7 @@ namespace CouchBrowse
 				try
 				{
 					mSavedQuery=f.QueryDef;
-					string result=mDB.ExecTempView(txtServer.Text,db,mSavedQuery);
+					string result=mDB.ExecTempView(txtServer.Text,db,mSavedQuery,f.StartKey,f.EndKey);
 					// This output really needs formatting, but for now we will just
 					// replace the unix line breaks with windows ones...
 					result=result.Replace("\n","\r\n");

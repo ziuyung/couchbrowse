@@ -49,6 +49,10 @@ namespace CouchBrowse
 			this.txtViewDef = new System.Windows.Forms.TextBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
+			this.txtStartKey = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.txtEndKey = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -73,7 +77,7 @@ namespace CouchBrowse
 			// button2
 			// 
 			this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.button2.Location = new System.Drawing.Point(178, 196);
+			this.button2.Location = new System.Drawing.Point(178, 229);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 23);
 			this.button2.TabIndex = 5;
@@ -83,18 +87,52 @@ namespace CouchBrowse
 			// button1
 			// 
 			this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.button1.Location = new System.Drawing.Point(97, 196);
+			this.button1.Location = new System.Drawing.Point(97, 229);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 4;
 			this.button1.Text = "OK";
 			this.button1.UseVisualStyleBackColor = true;
 			// 
+			// txtStartKey
+			// 
+			this.txtStartKey.Location = new System.Drawing.Point(72, 193);
+			this.txtStartKey.Name = "txtStartKey";
+			this.txtStartKey.Size = new System.Drawing.Size(100, 20);
+			this.txtStartKey.TabIndex = 6;
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(12, 196);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(54, 23);
+			this.label2.TabIndex = 7;
+			this.label2.Text = "Start Key:";
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(178, 196);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(54, 23);
+			this.label3.TabIndex = 9;
+			this.label3.Text = "End Key:";
+			// 
+			// txtEndKey
+			// 
+			this.txtEndKey.Location = new System.Drawing.Point(238, 193);
+			this.txtEndKey.Name = "txtEndKey";
+			this.txtEndKey.Size = new System.Drawing.Size(100, 20);
+			this.txtEndKey.TabIndex = 8;
+			// 
 			// QueryForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(350, 227);
+			this.ClientSize = new System.Drawing.Size(350, 262);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.txtEndKey);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.txtStartKey);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.txtViewDef);
@@ -106,6 +144,10 @@ namespace CouchBrowse
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.TextBox txtEndKey;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox txtStartKey;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.TextBox txtViewDef;
