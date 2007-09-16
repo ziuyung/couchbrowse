@@ -74,14 +74,12 @@ namespace SharpCouch
 		/// <returns>The number of documents in the database</returns>
 		public int CountDocuments(string server,string db)
 		{
-			// I don't know a more efficient way of doing this at
-			// present other than getting a list of all documents...
-			string result=DoRequest(server+"/"+db+"/_all_docs","GET");
+			// Get information about the database...
+			string result=DoRequest(server+"/"+db,"GET");
 
-			int count=0;
+			// The document count is a field within...
 			JsonData d=JsonMapper.ToObject(result);
-			if(d["rows"].IsArray)
-				count=d["rows"].Count;
+			int count=int.Parse(d["doc_count"].ToString());
 			return count;
 		}
 
