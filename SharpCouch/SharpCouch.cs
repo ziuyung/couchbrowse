@@ -17,7 +17,8 @@
 
 using System;
 using System.IO;  
-using System.Net;  
+using System.Net; 
+using System.Web;
 using System.Text;
 using System.Collections.Generic;
 using LitJson;
@@ -144,12 +145,12 @@ namespace SharpCouch
 			string url=server+"/"+db+"/_temp_view";
 			if(startkey!=null)
 			{
-				url+="?startkey="+startkey;
+				url+="?startkey="+HttpUtility.UrlEncode(startkey);
 			}
 			if(endkey!=null)
 			{
 				if(startkey==null) url+="?"; else url+="&";
-				url+="endkey="+endkey;
+				url+="endkey="+HttpUtility.UrlEncode(endkey);
 			}
 			return DoRequest(url,"POST",viewdef,"application/javascript");
 		}
@@ -178,6 +179,31 @@ namespace SharpCouch
 			return DoRequest(server+"/"+db+"/"+docid,"GET");
 		}
 
+		/// <summary>
+		/// Get a document.
+		/// </summary>
+		/// <param name="server">The server URL</param>
+		/// <param name="db">The database name</param>
+		/// <param name="docid">The document ID.</param>
+		/// <param name="startkey">The startkey or null not to use</param>
+		/// <param name="endkey">The endkey or null not to use</param>
+		/// <returns>The document contents (JSON)</returns>
+		public string GetDocument(string server,string db,string docid,string startkey,string endkey)
+		{
+			string url=server+"/"+db+"/"+docid;
+			if(startkey!=null)
+			{
+				url+="?startkey="+HttpUtility.UrlEncode(startkey);
+			}
+			if(endkey!=null)
+			{
+				if(startkey==null) url+="?"; else url+="&";
+				url+="endkey="+HttpUtility.UrlEncode(endkey);
+			}
+			return DoRequest(url,"GET");
+		}
+		
+		
 		/// <summary>
 		/// Delete a document.
 		/// </summary>
