@@ -136,12 +136,21 @@ namespace SharpCouch
 		/// </summary>
 		/// <param name="server">The server URL</param>
 		/// <param name="db">The database name</param>
-		/// <param name="viewdef">The javascript view definition</param>
+		/// <param name="map">The javascript map function</param>
+		/// <param name="reduce">The javascript reduce function or
+		/// null if not required</param>
 		/// <param name="startkey">The startkey or null not to use</param>
 		/// <param name="endkey">The endkey or null not to use</param>
 		/// <returns>The result (JSON format)</returns>
-		public string ExecTempView(string server,string db,string viewdef,string startkey,string endkey)
+		public string ExecTempView(string server,string db,string map,string reduce,string startkey,string endkey)
 		{
+			// Generate the JSON view definition from the supplied
+			// map and optional reduce functions...
+			string viewdef="{ \"map\":\""+map+"\"";
+			if(reduce!=null)
+				viewdef+=",\"reduce\":\""+reduce+"\"";
+			viewdef+="}";
+
 			string url=server+"/"+db+"/_temp_view";
 			if(startkey!=null)
 			{
@@ -152,7 +161,7 @@ namespace SharpCouch
 				if(startkey==null) url+="?"; else url+="&";
 				url+="endkey="+HttpUtility.UrlEncode(endkey);
 			}
-			return DoRequest(url,"POST",viewdef,"application/javascript");
+			return DoRequest(url,"POST",viewdef,"application/json");
 		}
 		
 		/// <summary>
