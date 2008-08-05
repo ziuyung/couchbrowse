@@ -72,7 +72,7 @@ namespace CouchBrowse
 			this.txtServer.Name = "txtServer";
 			this.txtServer.Size = new System.Drawing.Size(237, 20);
 			this.txtServer.TabIndex = 0;
-			this.txtServer.Text = "http://192.168.0.21:8888";
+			this.txtServer.Text = "http://192.168.0.21:5984";
 			// 
 			// label1
 			// 

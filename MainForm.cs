@@ -31,7 +31,8 @@ namespace CouchBrowse
 		
 		private DB mDB;
 		private bool mConnected;
-		private string mSavedQuery="function(doc) { return doc; }";
+		private string mSavedMap="function(doc) { emit(null,doc); }";
+		private string mSavedReduce="";
 		
 		public MainForm()
 		{
@@ -181,13 +182,14 @@ namespace CouchBrowse
 		{
 			string db=GetSelectedDB();
 			if(db=="") return;
-			QueryForm f=new QueryForm(mSavedQuery);
+			QueryForm f=new QueryForm(mSavedMap,mSavedReduce);
 			if(f.ShowDialog()==DialogResult.OK)
 			{
 				try
 				{
-					mSavedQuery=f.QueryDef;
-					string result=mDB.ExecTempView(txtServer.Text,db,mSavedQuery,f.StartKey,f.EndKey);
+					mSavedMap=f.MapFunction;
+					mSavedReduce=f.ReduceFunction;
+					string result=mDB.ExecTempView(txtServer.Text,db,mSavedMap,mSavedReduce==""?null:mSavedReduce,f.StartKey,f.EndKey);
 					// This output really needs formatting, but for now we will just
 					// replace the unix line breaks with windows ones...
 					result=result.Replace("\n","\r\n");

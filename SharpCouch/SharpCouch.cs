@@ -100,8 +100,8 @@ namespace SharpCouch
 			foreach(JsonData row in d["rows"])
 			{
 				DocInfo doc=new DocInfo();
-				doc.ID=row["_id"].ToString();
-				doc.Revision=row["_rev"].ToString();
+				doc.ID=row["id"].ToString();
+				doc.Revision=(row["value"])["rev"].ToString();
 				list.Add(doc);
 			}			
 			return list.ToArray();
@@ -255,6 +255,10 @@ namespace SharpCouch
 		{
 			HttpWebRequest req=WebRequest.Create(url) as HttpWebRequest;
 			req.Method=method;
+			// Yuk - set an infinite timeout on this for now, because
+			// executing a temporary view (for example) can take a very
+			// long time...
+			req.Timeout=System.Threading.Timeout.Infinite;
 			if(contenttype!=null)
 				req.ContentType=contenttype;
 			
