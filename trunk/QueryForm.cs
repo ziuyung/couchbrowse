@@ -27,10 +27,15 @@ namespace CouchBrowse
 	public partial class QueryForm : Form
 	{
 		
-		public string QueryDef
+		public string MapFunction
 		{
-			get { return txtViewDef.Text; }
+			get { return txtMapFunction.Text; }
 		}		
+
+		public string ReduceFunction
+		{
+			get { return txtReduceFunction.Text; }
+		}
 
 		public string StartKey
 		{
@@ -54,10 +59,12 @@ namespace CouchBrowse
 			}
 		}		
 		
-		public QueryForm(string initialtext)
+		public QueryForm(string initialmap,string initialreduce)
 		{
 			InitializeComponent();
-			txtViewDef.Text=initialtext;
+			txtMapFunction.Text=initialmap;
+			txtReduceFunction.Text=initialreduce;
+			
 		}
 	}
 }
